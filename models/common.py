@@ -300,7 +300,7 @@ class Detections:
         for d in x:
             for k in ['imgs', 'pred', 'xyxy', 'xyxyn', 'xywh', 'xywhn']:
                 setattr(d, k, getattr(d, k)[0])  # pop out of list
-        print(x)
+        return x
 
 
 class Classify(nn.Module):
