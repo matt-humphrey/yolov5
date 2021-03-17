@@ -254,8 +254,10 @@ class Detections:
 
     def display(self, pprint=False, show=False, save=False, render=False, save_txt=False, save_dir=''):
         colors = color_list()
+        str = ""
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
-            str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]} '
+            str += f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]} '
+            str += '\n'
             if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
