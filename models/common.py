@@ -252,7 +252,7 @@ class Detections:
         self.t = ((times[i + 1] - times[i]) * 1000 / self.n for i in range(3))  # timestamps (ms)
         self.s = shape  # inference BCHW shape
 
-    def display(self, pprint=False, show=False, save=False, render=False, save_dir=''):
+    def display(self, pprint=False, show=False, save=False, render=False, save_txt=False, save_dir=''):
         colors = color_list()
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]} '
@@ -275,6 +275,10 @@ class Detections:
                 print(f"{'Saving' * (i == 0)} {f},", end='' if i < self.n - 1 else ' done.\n')
             if render:
                 self.imgs[i] = np.asarray(img)
+            if save_txt:
+                text_file = open("output.txt", "w")
+                text_file.write(str)
+                text_file.close()
 
     def print(self):
         self.display(pprint=True)  # print results
