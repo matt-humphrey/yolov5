@@ -254,13 +254,15 @@ class Detections:
 
     def display(self, pprint=False, show=False, save=False, render=False, save_txt=False, save_dir=''):
         colors = color_list()
-        str = ""
+        txt = ""
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
-            str += f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]} '
+            str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, '
+            txt += f'image {i + 1}: '
             if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
+                    txt += f"{n}"  + "\n"
                 if show or save or render:
                     for *box, conf, cls in pred:  # xyxy, confidence, class
                         label = f'{self.names[int(cls)]} {conf:.2f}'
@@ -278,7 +280,7 @@ class Detections:
                 self.imgs[i] = np.asarray(img)
             if save_txt:
                 text_file = open("output.txt", "w")
-                text_file.write(str)
+                text_file.write(txt)
                 text_file.close()
 
     def print(self):
