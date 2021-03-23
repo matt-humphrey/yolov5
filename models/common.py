@@ -269,13 +269,13 @@ class Detections:
                         txt += f"{i}: {n}" + "\n"
                         count += 1
                     count += 1
+            nlines = txt.count("\n")
+            if nlines != len(self.pred):
+                txt += f"{count}: 0" + "\n"
             if show or save or render:
                 for *box, conf, cls in pred:  # xyxy, confidence, class
                     label = f'{self.names[int(cls)]} {conf:.2f}'
                     plot_one_box(box, img, label=label, color=colors[int(cls) % 10]) 
-            nlines = txt.count("\n")
-            if nlines != len(self.pred):
-                txt += f"{i}: 0" + "\n"
             img = Image.fromarray(img.astype(np.uint8)) if isinstance(img, np.ndarray) else img  # from np
             if pprint:
                 print(str.rstrip(', '))
@@ -288,6 +288,9 @@ class Detections:
             if render:
                 self.imgs[i] = np.asarray(img)
             if save_txt:
+#                 nlines = txt.count("\n")
+#                 if nlines != len(self.pred):
+#                     txt += f"{i}: 0" + "\n"
                 text_file = open("output.txt", "w")
                 text_file.write(txt)
                 text_file.close()
