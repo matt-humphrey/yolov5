@@ -256,6 +256,7 @@ class Detections:
         colors = color_list()
         txt = ""
         count = -1
+        count2 = 0
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, ' 
             if pred is not None:
@@ -263,13 +264,14 @@ class Detections:
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
                     count += 1
-                    print(count, i)
-                    if count == i:
+                    if count == count2 == i:
                         txt += f"{i}: {n}" + "\n"
                     else:
                         txt += f"{count}: 0" + "\n"
                         txt += f"{i}: {n}" + "\n"
                         count += 1
+                        count2 += 1
+                    count2 += 1
             if show or save or render:
                 for *box, conf, cls in pred:  # xyxy, confidence, class
                     label = f'{self.names[int(cls)]} {conf:.2f}'
