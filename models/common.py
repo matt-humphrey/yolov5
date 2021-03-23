@@ -262,14 +262,13 @@ class Detections:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
-                    if n is not None:
-                        txt += f'{n}' + "\n"
-                    else:
-                        txt += '0' + "\n"
-                if show or save or render:
-                    for *box, conf, cls in pred:  # xyxy, confidence, class
-                        label = f'{self.names[int(cls)]} {conf:.2f}'
-                        plot_one_box(box, img, label=label, color=colors[int(cls) % 10])    
+                    txt += 'test' + "\n"
+            else:
+                txt += 'hello' + "\n"
+#                 if show or save or render:
+#                     for *box, conf, cls in pred:  # xyxy, confidence, class
+#                         label = f'{self.names[int(cls)]} {conf:.2f}'
+#                         plot_one_box(box, img, label=label, color=colors[int(cls) % 10])    
             img = Image.fromarray(img.astype(np.uint8)) if isinstance(img, np.ndarray) else img  # from np
             if pprint:
                 print(str.rstrip(', '))
