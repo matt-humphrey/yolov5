@@ -262,7 +262,7 @@ class Detections:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
-                    if i == count and i < len(self.pred):
+                    if i == count:
                         txt += f"{i}: {n}" + "\n"
                     else:
                         txt += f"{count}: 0" + "\n"
@@ -270,7 +270,7 @@ class Detections:
                         count += 1
                     count += 1
             nlines = txt.count("\n")
-            if nlines < len(self.pred) and count >= len(self.pred):
+            if nlines != len(self.pred) and count >= len(self.pred): # - 1
                 txt += f"{count}: 0" + "\n"
             if show or save or render:
                 for *box, conf, cls in pred:  # xyxy, confidence, class
