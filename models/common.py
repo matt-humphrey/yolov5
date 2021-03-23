@@ -265,7 +265,7 @@ class Detections:
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
                     if count == i:
                         txt += f"{i}: {n}" + "\n"
-                    elif i == len(self.pred) - 1:
+                    elif count == len(self.pred) - 1:
                         txt += f"{i}: 0" + "\n"
                     else:
                         txt += f"{count}: 0" + "\n"
