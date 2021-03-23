@@ -258,7 +258,6 @@ class Detections:
         count = -1
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, ' 
-            txt += f'{i}: '
             if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
@@ -266,9 +265,11 @@ class Detections:
                     count += 1
                     print(count, i)
                     if count == i:
-                        txt += f"{n}" + "\n"
+                        txt += f"{i}: {n}" + "\n"
                     else:
-                        txt += "0" + "\n"
+                        txt += f"{count}: 0" + "\n"
+                        txt += f"{i}: {n}" + "\n"
+                        count += 1
             if show or save or render:
                 for *box, conf, cls in pred:  # xyxy, confidence, class
                     label = f'{self.names[int(cls)]} {conf:.2f}'
