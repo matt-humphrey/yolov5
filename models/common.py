@@ -256,10 +256,8 @@ class Detections:
         colors = color_list()
         txt = ""
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
-            str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, '
-            if pred is None:
-                txt += f'{i}: 0' + "\n" 
-            else:
+            str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, ' 
+            if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
