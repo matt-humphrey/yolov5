@@ -267,7 +267,7 @@ class Detections:
                         count += 1
                     else:
                         txt += f'{count}: 0' + "\n"
-                        count += 1        
+                        count += 2        
                 if show or save or render:
                     for *box, conf, cls in pred:  # xyxy, confidence, class
                         label = f'{self.names[int(cls)]} {conf:.2f}'
