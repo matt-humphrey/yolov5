@@ -262,7 +262,7 @@ class Detections:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
-                    txt += f"{n - 1}"  + "\n"
+                    txt += f"{n}"  + "\n"
                 if show or save or render:
                     for *box, conf, cls in pred:  # xyxy, confidence, class
                         label = f'{self.names[int(cls)]} {conf:.2f}'
