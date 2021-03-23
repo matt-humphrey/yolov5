@@ -257,6 +257,8 @@ class Detections:
         txt = ""
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, '
+            if pred is None:
+                txt += f'{count}: 0' + "\n" 
             if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
@@ -265,9 +267,7 @@ class Detections:
                 if show or save or render:
                     for *box, conf, cls in pred:  # xyxy, confidence, class
                         label = f'{self.names[int(cls)]} {conf:.2f}'
-                        plot_one_box(box, img, label=label, color=colors[int(cls) % 10])
-            else:
-                txt += f'{count}: 0' + "\n"    
+                        plot_one_box(box, img, label=label, color=colors[int(cls) % 10])    
             img = Image.fromarray(img.astype(np.uint8)) if isinstance(img, np.ndarray) else img  # from np
             if pprint:
                 print(str.rstrip(', '))
