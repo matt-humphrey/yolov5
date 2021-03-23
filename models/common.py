@@ -257,7 +257,7 @@ class Detections:
         txt = ""
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]}, '
-            txt += f'result{i + 1}: '
+            txt += f'{i}: '
             if pred is not None:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
