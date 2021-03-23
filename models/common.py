@@ -262,7 +262,6 @@ class Detections:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
-                    print(i, count, len(self.pred) - 1)
                     if i == count:
                         txt += f"{i}: {n}" + "\n"
                     else:
