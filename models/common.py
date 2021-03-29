@@ -262,11 +262,16 @@ class Detections:
                 for c in pred[:, -1].unique():
                     n = (pred[:, -1] == c).sum()  # detections per class
                     str += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  + "\n"
+                    print(f"i: {i}   c: {c}")
+                    print(len(self.pred))
                     if i == count:
+                        print("A")
                         txt += f"{i}: {n}" + "\n"
                     elif i == len(self.pred):
+                        print("B")
                         txt += f"{i}: {n}" + "\n"
                     else:
+                        print("C")
                         txt += f"{count}: 0" + "\n"
                         txt += f"{i}: {n}" + "\n"
                         count += 1
