@@ -270,7 +270,7 @@ class Detections:
                         count += 1
                     count += 1
             nlines = txt.count("\n")
-            if nlines != len(self.pred) and count >= len(self.pred) - 1:
+            if nlines != len(self.pred) and count >= len(self.pred):
                 print("HA!")
                 txt += f"{count}: 0" + "\n"
             if show or save or render:
