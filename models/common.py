@@ -271,7 +271,6 @@ class Detections:
                     count += 1
             nlines = txt.count("\n")
             if nlines != len(self.pred) and count >= len(self.pred):
-                print("HA!")
                 txt += f"{count}: 0" + "\n"
             if show or save or render:
                 for *box, conf, cls in pred:  # xyxy, confidence, class
